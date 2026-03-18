@@ -67,6 +67,19 @@ Authorization: Bearer <token>
 
 POST /api/transactions/upload
 
+SAMPLE JSON (MANDATORY)
+[
+{
+"transactionId": "TXN001",
+"date": "2026-03-18",
+"customerId": "CUST001",
+"amount": 1000,
+"taxRate": 0.18,
+"reportedTax": 150,
+"transactionType": "SALE"
+}
+]
+
 ### 2. Reports
 
 GET /api/reports/customers
