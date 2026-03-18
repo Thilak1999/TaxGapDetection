@@ -56,17 +56,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public ExceptionSummaryDTO getExceptionSummary() {
-
-        Long total = exRepo.totalExceptions();
-
-        Object[] severity = exRepo.countBySeverity();
-
-        return new ExceptionSummaryDTO(
-                total,
-                ((Number) severity[0]).longValue(),
-                ((Number) severity[1]).longValue(),
-                ((Number) severity[2]).longValue()
-        );
+        return exRepo.getExceptionSummary();
     }
 
     @Override

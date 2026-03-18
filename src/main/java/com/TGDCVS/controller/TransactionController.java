@@ -4,6 +4,7 @@ import com.TGDCVS.dto.TransactionDTO;
 import com.TGDCVS.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ import java.util.List;
 public class TransactionController {
 
     private final TransactionService service;
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/upload")
     public ResponseEntity<?> upload(@RequestBody List<TransactionDTO> dtos) {
         service.processTransactions(dtos);
