@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 //@Configuration
 @EnableMethodSecurity
@@ -30,17 +29,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        JwtFilter jwtFilter = new JwtFilter(jwtUtil, userDetailsService);
-
         http
                 .csrf(csrf -> csrf.disable())
-//                .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("/api/auth/**").permitAll()
-//                        .anyRequest().authenticated()
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()
-                )
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+                        .requestMatchers(
+                                "/api/auth/**",
+                                "/swagger-ui.html",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**"
+                        ).permitAll()
+                        .anyRequest().authenticated()
+                );
 
         return http.build();
     }

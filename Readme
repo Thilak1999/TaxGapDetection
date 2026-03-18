@@ -105,3 +105,55 @@ Controller → Service → Repository → Database
 * Rule engine is database-driven (configurable via JSON)
 * JWT-based authentication ensures secure APIs
 * Optimized SQL queries for reporting
+
+##  API Documentation (Swagger)
+
+Swagger is integrated into the application for easy API exploration and testing.
+
+
+###  Access Swagger UI
+
+After starting the application, open:
+
+http://localhost:8080/swagger-ui/index.html
+
+### Authentication in Swagger
+
+1. Click on **"Authorize"** button in Swagger UI
+2. Enter your JWT token in the format:
+
+Bearer <your_token>
+
+3. Click **Authorize**
+
+
+### Available APIs
+
+Swagger provides interactive access to:
+
+* Authentication APIs (`/api/auth`)
+* Transaction APIs (`/api/transactions`)
+* Reporting APIs (`/api/reports`)
+
+---
+
+###  Configuration Notes
+
+* Swagger endpoints are publicly accessible:
+
+  * `/swagger-ui/**`
+  * `/v3/api-docs/**`
+
+* JWT filter excludes Swagger paths to avoid authentication errors
+
+
+### Dependency Used
+
+org.springdoc:springdoc-openapi-starter-webmvc-ui
+
+
+### Benefits
+
+* Easy API testing without Postman
+* Clear API documentation
+* Faster debugging and development
