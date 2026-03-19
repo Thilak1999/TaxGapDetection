@@ -24,15 +24,15 @@ public class ReportController {
 
     // A. Customer Summary
     @Operation(summary = "Get customer tax summary")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/customers")
     public List<CustomerTaxSummaryDTO> getCustomerSummary() {
         return reportService.getCustomerSummary();
     }
 
     // B. Exception Summary
-    @Operation(summary = "Get customer tax summary")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @Operation(summary = "Get exception summary")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/exceptions/summary")
     public ExceptionSummaryDTO getExceptionSummary() {
         return reportService.getExceptionSummary();
@@ -40,7 +40,7 @@ public class ReportController {
 
     // Customer-wise Exception Count
     @Operation(summary = "Get customer-wise exception count")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/exceptions/customer")
     public Map<String, Long> getCustomerExceptionCount() {
         return reportService.getCustomerExceptionCount();

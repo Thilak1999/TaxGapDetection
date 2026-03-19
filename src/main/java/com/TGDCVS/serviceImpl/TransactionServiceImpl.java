@@ -65,6 +65,14 @@ public class TransactionServiceImpl implements TransactionService {
 
     private List<String> validate(TransactionDTO dto) {
         List<String> errors = new ArrayList<>();
+        if (dto.getCustomerId() == null)
+            errors.add("Missing customerId");
+
+        if (dto.getTaxRate() == null)
+            errors.add("Missing taxRate");
+
+        if (dto.getTransactionType() == null)
+            errors.add("Missing transactionType");
 
         if (dto.getAmount() == null || dto.getAmount().compareTo(BigDecimal.ZERO) <= 0)
             errors.add("Invalid amount");

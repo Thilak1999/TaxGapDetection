@@ -8,17 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ExceptionRepository extends JpaRepository<ExceptionEntity, Long> {
-    @Query(value = "SELECT COUNT(*) FROM exceptions", nativeQuery = true)
-    Long totalExceptions();
 
-    @Query(value = """
-SELECT 
-    SUM(CASE WHEN severity='HIGH' THEN 1 ELSE 0 END),
-    SUM(CASE WHEN severity='MEDIUM' THEN 1 ELSE 0 END),
-    SUM(CASE WHEN severity='LOW' THEN 1 ELSE 0 END)
-FROM exceptions
-""", nativeQuery = true)
-    Object[] countBySeverity();
 
     @Query(value = """
 SELECT customer_id, COUNT(*) 
@@ -37,4 +27,10 @@ GROUP BY customer_id
     FROM ExceptionEntity e
 """)
     ExceptionSummaryDTO getExceptionSummary();
+    List<ExceptionEntity> findByCustomerId(String customerId);
+
+    List<ExceptionEntity> findBySeverity(String severity);
+
+    List<ExceptionEntity> findByRuleName(String ruleName);
+
 }
